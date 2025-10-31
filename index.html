@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Football Tournament Generator</h1>
+        <h1>⚽ Football Tournament Generator</h1>
     </header>
     <main>
         <section id="setup-section">
@@ -20,13 +20,16 @@
                 </div>
 
                 <div id="teams-section">
-                    <h3>Teams</h3>
+                    <h3>Teams (Minimum 2)</h3>
                     <div id="teams-list">
                         <!-- Teams will be added here dynamically -->
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="team-name-input" placeholder="Enter team name">
-                        <button type="button" id="add-team-btn">Add Team</button>
+                    <div class="add-team-form">
+                        <div class="form-row">
+                            <input type="text" id="team-name-input" placeholder="Enter team name" required>
+                            <input type="color" id="team-color-input" value="#007bff" title="Team color">
+                            <button type="button" id="add-team-btn">➕ Add Team</button>
+                        </div>
                     </div>
                 </div>
 
@@ -36,23 +39,80 @@
                         <label for="tournament-format">Select Format:</label>
                         <select id="tournament-format" name="tournament-format">
                             <option value="knockout">Knockout/Elimination</option>
-                            <option value="group">Group Stage</option>
+                            <option value="group">Group Stage + Knockout</option>
+                            <option value="group-only">Group Stage Only</option>
                         </select>
                     </div>
+                    
+                    <div id="group-options" class="hidden">
+                        <div class="form-group">
+                            <label for="num-groups">Number of Groups:</label>
+                            <select id="num-groups">
+                                <option value="2">2 Groups</option>
+                                <option value="4">4 Groups</option>
+                                <option value="8">8 Groups</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teams-per-group">Teams advancing per group:</label>
+                            <select id="teams-per-group">
+                                <option value="1">Top 1</option>
+                                <option value="2" selected>Top 2</option>
+                                <option value="3">Top 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
                         <input type="checkbox" id="third-place-match" name="third-place-match">
                         <label for="third-place-match">Include Match for 3rd Place</label>
                     </div>
+                    
+                    <div class="form-group">
+                        <h4>Point System (for group stages)</h4>
+                        <div class="point-system">
+                            <label>Win: <input type="number" id="points-win" value="3" min="0" max="10"></label>
+                            <label>Draw: <input type="number" id="points-draw" value="1" min="0" max="10"></label>
+                            <label>Loss: <input type="number" id="points-loss" value="0" min="0" max="10"></label>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" id="generate-tournament-btn">Generate Tournament</button>
+                <button type="submit" id="generate-tournament-btn" class="primary-btn">🏆 Generate Tournament</button>
             </form>
         </section>
 
         <section id="tournament-dashboard" class="hidden">
-            <h2>Tournament Dashboard</h2>
-            <div id="brackets-container">
-                <!-- Brackets and fixtures will be displayed here -->
+            <div class="dashboard-header">
+                <h2 id="tournament-title">Tournament Dashboard</h2>
+                <button id="back-to-setup-btn" class="secondary-btn">← Back to Setup</button>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="fixtures">📅 Fixtures</button>
+                <button class="tab-btn" data-tab="standings">📊 Standings</button>
+                <button class="tab-btn" data-tab="bracket">🏆 Bracket</button>
+            </div>
+
+            <div id="fixtures-tab" class="tab-content active">
+                <div id="group-stage-container" class="hidden">
+                    <h3>Group Stage</h3>
+                    <div id="groups-display"></div>
+                </div>
+                <div id="knockout-container" class="hidden">
+                    <h3>Knockout Stage</h3>
+                    <div id="knockout-fixtures"></div>
+                </div>
+            </div>
+
+            <div id="standings-tab" class="tab-content">
+                <h3>Standings</h3>
+                <div id="standings-display"></div>
+            </div>
+
+            <div id="bracket-tab" class="tab-content">
+                <h3>Tournament Bracket</h3>
+                <div id="bracket-display"></div>
             </div>
         </section>
     </main>
