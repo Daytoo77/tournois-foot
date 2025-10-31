@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Tournament Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Football Tournament Generator</h1>
+    </header>
+    <main>
+        <section id="setup-section">
+            <h2>Tournament Setup</h2>
+            <form id="setup-form">
+                <div class="form-group">
+                    <label for="tournament-name">Tournament Name</label>
+                    <input type="text" id="tournament-name" name="tournament-name" required>
+                </div>
+
+                <div id="teams-section">
+                    <h3>Teams</h3>
+                    <div id="teams-list">
+                        <!-- Teams will be added here dynamically -->
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="team-name-input" placeholder="Enter team name">
+                        <button type="button" id="add-team-btn">Add Team</button>
+                    </div>
+                </div>
+
+                <div id="format-section">
+                    <h3>Tournament Format</h3>
+                    <div class="form-group">
+                        <label for="tournament-format">Select Format:</label>
+                        <select id="tournament-format" name="tournament-format">
+                            <option value="knockout">Knockout/Elimination</option>
+                            <option value="group">Group Stage</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="third-place-match" name="third-place-match">
+                        <label for="third-place-match">Include Match for 3rd Place</label>
+                    </div>
+                </div>
+
+                <button type="submit" id="generate-tournament-btn">Generate Tournament</button>
+            </form>
+        </section>
+
+        <section id="tournament-dashboard" class="hidden">
+            <h2>Tournament Dashboard</h2>
+            <div id="brackets-container">
+                <!-- Brackets and fixtures will be displayed here -->
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
